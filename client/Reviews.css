@@ -1,0 +1,14 @@
+body {
+  font-family: 'Gentium Basic', serif;
+}
+
+.reviews {
+  display: grid;
+  grid-auto-flow: row
+}
+
+.button {
+  appearance: none !important;
+  background-color: white;
+  color: black;
+}
