@@ -168,9 +168,9 @@ const productsSave = products => {
     })
 }
 
-// productsSave(jewelry.results);
-// productsSave(housewares.results);
-// productsSave(accessories.results);
-// productsSave(toys.results);
+productsSave(jewelry.results);
+productsSave(housewares.results);
+productsSave(accessories.results);
+productsSave(toys.results);
 
 module.exports = { Reviews, Products };
