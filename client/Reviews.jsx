@@ -27,10 +27,10 @@ export default class Reviews extends React.Component {
 
   // in componentDidMount have to create logic to only load 4 reviews on any refresh and onload
   componentDidMount() {
-    let reviewsURL = 'http://localhost:3004/reviews';
-    let productsURL = 'http://localhost:3004/products';
-    // let http = 'http://ec2-3-15-210-75.us-east-2.compute.amazonaws.com/reviews';
-    // let http = 'http://ec2-3-15-210-75.us-east-2.compute.amazonaws.com/products';
+    // let reviewsURL = 'http://localhost:3004/reviews';
+    // let productsURL = 'http://localhost:3004/products';
+    let http = 'http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/reviews';
+    let http = 'http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/products';
 
     // Use axios all to populate initial reviews data and to get image of current product
     //  to be posted in each review
@@ -206,8 +206,8 @@ export default class Reviews extends React.Component {
         return reviews;
       })
       .then((reviews) => {
-        let http = 'http://localhost:3004/newReviews';
-        // let http = 'http://ec2-3-15-210-75.us-east-2.compute.amazonaws.com/newReviews';    
+        // let http = 'http://localhost:3004/newReviews';
+        let http = 'http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/newReviews';    
         axios.post(http, {
           product_id: this.state.product_id,
           newReviews: reviews

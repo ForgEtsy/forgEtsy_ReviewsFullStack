@@ -10,8 +10,11 @@ const { port } = require('../server/server.js')
 const faker = require('faker');
 const mongoose = require('mongoose');
 
-// URL for Docker to host a new mongo database container
-mongoose.connect(`mongodb://localhost:${port}/products`, {useNewUrlParser: true})
+// Local development URL
+// mongoose.connect(`mongodb://localhost:${port}/products`, {useNewUrlParser: true})
+
+// Deployment URL
+mongoose.connect(`mongodb://mongo:27017/products`, {useNewUrlParser: true})
 
 //connect that shit
 const db = mongoose.connection;
@@ -165,9 +168,9 @@ const productsSave = products => {
     })
 }
 
-// productsSave(jewelry.results);
-// productsSave(housewares.results);
-// productsSave(accessories.results);
-// productsSave(toys.results);
+productsSave(jewelry.results);
+productsSave(housewares.results);
+productsSave(accessories.results);
+productsSave(toys.results);
 
 module.exports = { Reviews, Products };
