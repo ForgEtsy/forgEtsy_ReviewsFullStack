@@ -244,9 +244,7 @@ export default class Reviews extends React.Component {
   render() {
     if (this.state.mounted) {
     // only show the first 'x' amount of reviews based on shown variable in state
-    console.log("These are all of the reviews: " + this.state.reviews)
     const shownReviews = this.state.reviews.slice(0, this.state.shownItems);
-    console.log("These are all of the to be shown reviews: " + shownReviews);
       return (
         <div>
         <hr></hr>
