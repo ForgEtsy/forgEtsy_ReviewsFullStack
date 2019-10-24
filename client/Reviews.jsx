@@ -4,10 +4,6 @@ import faker from 'faker';
 import styles from './Reviews.css';
 import ReviewsBlock from './components/ReviewsBlock.js';
 
-
-// make it only show 4/7 reviews on refresh
-
-
 export default class Reviews extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +24,7 @@ export default class Reviews extends React.Component {
     this.createReviewStars = this.createReviewStars.bind(this);
   }
 
+  // in componentDidMount have to create logic to only load 4 reviews on any refresh and onload
   componentDidMount() {
     let reviewsURL = 'http://localhost:3004/reviews';
     let productsURL = 'http://localhost:3004/products';
