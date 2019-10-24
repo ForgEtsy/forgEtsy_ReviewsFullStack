@@ -1,2 +1,15 @@
 version: '3'
 services: 
+  app:
+    container-name: products
+    restart: always
+    build: .
+    ports:
+      - '80:3004'
+    links:
+      - mongo
+  mongo:
+    container-name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'

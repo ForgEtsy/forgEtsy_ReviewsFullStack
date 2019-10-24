@@ -5,12 +5,12 @@ const accessories = require('../accessories.js');
 const toys = require('../toys.js');
 const axios = require('axios');
 
-/** import YOUR port number here */
+// import dependencies for database
 const { port } = require('../server/server.js')
 const faker = require('faker');
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://localhost:${port}/products`, {useNewUrlParser: true})
+mongoose.connect(`mongodb://mongo:27017/products`, {useNewUrlParser: true})
 
 //connect that shit
 const db = mongoose.connection;
