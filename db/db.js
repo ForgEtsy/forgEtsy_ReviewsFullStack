@@ -10,7 +10,7 @@ const { port } = require('../server/server.js')
 const faker = require('faker');
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://mongo:27017/products`, {useNewUrlParser: true})
+mongoose.connect(`mongodb://localhost:${port}/products`, {useNewUrlParser: true})
 
 //connect that shit
 const db = mongoose.connection;
@@ -118,6 +118,7 @@ const productsSave = products => {
           return res;
         }
 
+        // create 10 new reviews per product listing
         for (var x = 0; x < 10; x++) {
           descriptions.push(getNewReview()); 
           listingIDs.push(listing_id);
@@ -163,9 +164,9 @@ const productsSave = products => {
     })
 }
 
-productsSave(jewelry.results);
-productsSave(housewares.results);
-productsSave(accessories.results);
-productsSave(toys.results);
+// productsSave(jewelry.results);
+// productsSave(housewares.results);
+// productsSave(accessories.results);
+// productsSave(toys.results);
 
 module.exports = { Reviews, Products };

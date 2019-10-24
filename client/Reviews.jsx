@@ -4,6 +4,10 @@ import faker from 'faker';
 import styles from './Reviews.css';
 import ReviewsBlock from './components/ReviewsBlock.js';
 
+
+// make it only show 4/7 reviews on refresh
+
+
 export default class Reviews extends React.Component {
   constructor(props) {
     super(props);
@@ -63,8 +67,8 @@ export default class Reviews extends React.Component {
       if (!Array.isArray(allReviews[i].rating)) {
         let starArr = [];
         let duplicate = allReviews[i].rating;
-        let floor = Math.floor(duplicate);
-        let difference =  duplicate - floor;
+        let floor = Math.floor(duplicate); // 4.56 --> 4
+        let difference =  duplicate - floor; //.56 --> .5
         let j = 0;
 
         while (j < floor) {
@@ -80,7 +84,7 @@ export default class Reviews extends React.Component {
           starArr.push(0);
         };
         // make review number equal to an array representing the equivalent star rating
-        allReviews[i].rating = starArr;
+        allReviews[i].rating = starArr; // [1, 1, 1, 1, 0.5, 0]
       };
     };
 
