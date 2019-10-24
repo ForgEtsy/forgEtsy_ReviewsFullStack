@@ -10,7 +10,8 @@ const { port } = require('../server/server.js')
 const faker = require('faker');
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://localhost:${port}/products`, {useNewUrlParser: true})
+// URL for Docker to host a new mongo database container
+mongoose.connect(`mongodb://mongo:27017/products`, {useNewUrlParser: true})
 
 //connect that shit
 const db = mongoose.connection;
