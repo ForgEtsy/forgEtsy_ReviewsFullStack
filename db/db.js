@@ -140,7 +140,7 @@ const productsSave = products => {
             review_id: Number(`${listingIDs[i]}${i}${j}`),
             date: faker.date.recent(45),
             description: response[i].data[0],
-            rating: (Math.random() * 6),
+            rating: (Math.random() * 5),
             user_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
             user_photo_url: faker.image.avatar(),
             product_id: listingIDs[i],
@@ -164,9 +164,9 @@ const productsSave = products => {
     })
 }
 
-productsSave(jewelry.results);
-productsSave(housewares.results);
-productsSave(accessories.results);
-productsSave(toys.results);
+// productsSave(jewelry.results);
+// productsSave(housewares.results);
+// productsSave(accessories.results);
+// productsSave(toys.results);
 
 module.exports = { Reviews, Products };

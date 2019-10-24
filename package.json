@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo no test script available",
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "dev": "webpack -d --watch"
   },
   "repository": {

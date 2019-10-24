@@ -4,15 +4,12 @@ import faker from 'faker';
 import styles from './Reviews.css';
 import ReviewsBlock from './components/ReviewsBlock.js';
 
-
-// make it only show 4/7 reviews on refresh
-
-
 export default class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       mounted: false,
+      shownItems: 5,
       product_id: 173033626,
       reviews: [],
       product_picture: '',
@@ -67,8 +64,8 @@ export default class Reviews extends React.Component {
       if (!Array.isArray(allReviews[i].rating)) {
         let starArr = [];
         let duplicate = allReviews[i].rating;
-        let floor = Math.floor(duplicate); // 4.56 --> 4
-        let difference =  duplicate - floor; //.56 --> .5
+        let floor = Math.floor(duplicate);
+        let difference =  duplicate - floor;
         let j = 0;
 
         while (j < floor) {
@@ -148,92 +145,111 @@ export default class Reviews extends React.Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  // Adds additional reviews to database for product
-  addMoreReviews() {
-    const reviews = [];
-    const descriptions = [];
-    // generate random number of reviews between min and max
-    let max = 6;
-    let min = 4;
-    const random = Math.floor((Math.random() * (max - min)) + min+1);
+  // First, increases visibility of current database reviews to user
+  //  Second, if MORE button presses exceeds current database review items
+  //  generate new review items and add to database
+  addMoreReviews() {    
+    if (this.state.shownItems >= this.state.reviews.length) {
+      // generate new reviews if the more button is clicked more than there are 
+      //  review items in state, will also update database with new items 
 
-    // using Promise to return a new GET request to the API
-    function getNewReview() {
-      return new Promise((resolve, reject) => {
-        axios.get('http://ron-swanson-quotes.herokuapp.com/v2/quotes')
-        .then(function (response) {
-          return resolve(response)
-        })
-        .catch(function (error) {
-           return reject(error);
+      // store newly created reviews and descriptions
+      const reviews = [];
+      const descriptions = [];
+
+      // using Promise to return a new GET request to the API
+      function getNewReview() {
+        return new Promise((resolve, reject) => {
+          axios.get('http://ron-swanson-quotes.herokuapp.com/v2/quotes')
+          .then(function (response) {
+            return resolve(response)
+          })
+          .catch(function (error) {
+            return reject(error);
+          });
         });
-      });
-    };
-
-    for (var x = 0; x < random; x++) {
-      // push a newly generated review into our review descriptions array
-      let newRev = getNewReview();
-      descriptions.push(newRev); 
-    };
-
-    Promise.all(descriptions)
-    .then(response => {
-      // iterate over all new completed review promise descriptions and create
-      //  new review with relevant review data
-      for (let j = 0; j < response.length; j++) {
-        // this random digit to add to review to ensure no duplicates are being added
-        //  to reviews database
-        const randomID = this.randomIntFromInterval(1, 100000);
-        // call description function for new review
-    
-        // look at adding half star amounts into review
-        let review = {
-          review_id: Number(`${this.state.product_id}${j}${randomID}`),
-          date: faker.date.past(45),
-          description: response[j].data[0],
-          rating: (Math.random() * 5),
-          user_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-          user_photo_url: faker.image.avatar(),
-          product_id: this.state.product_id,
-          product_user_image_url: this.state.product_picture
-        };
-
-        reviews.push(review);
       };
+
+      // generate an additional ten reviews
+      for (var x = 0; x < 10; x++) {
+        // push a newly generated review into our review descriptions array
+        let newRev = getNewReview();
+        descriptions.push(newRev); 
+      };
+
+      Promise.all(descriptions)
+      .then(response => {
+        // iterate over all new completed review promise descriptions and create
+        //  new review with relevant review data
+        for (let j = 0; j < response.length; j++) {
+          // this random digit to add to review to ensure no duplicates are being added
+          //  to reviews database
+          const randomID = this.randomIntFromInterval(1, 100000);
+          // call description function for new review
       
-      return reviews;
-    })
-    .then((reviews) => {
-      let http = 'http://localhost:3004/newReviews';
-      // let http = 'http://ec2-3-15-210-75.us-east-2.compute.amazonaws.com/newReviews';    
-      axios.post(http, {
-        product_id: this.state.product_id,
-        newReviews: reviews
+          // look at adding half star amounts into review
+          let review = {
+            review_id: Number(`${this.state.product_id}${j}${randomID}`),
+            date: faker.date.past(45),
+            description: response[j].data[0],
+            rating: (Math.random() * 5),
+            user_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+            user_photo_url: faker.image.avatar(),
+            product_id: this.state.product_id,
+            product_user_image_url: this.state.product_picture
+          };
+
+          reviews.push(review);
+        };
+        
+        return reviews;
       })
-      .then((response) => {
-        // update reviews, reviewsCount and averageRating based on new reviews in database
-        this.setState({
-          reviews: response.data
-        }, () => {
-          this.createReviewStars();
-          this.averageStars();
+      .then((reviews) => {
+        let http = 'http://localhost:3004/newReviews';
+        // let http = 'http://ec2-3-15-210-75.us-east-2.compute.amazonaws.com/newReviews';    
+        axios.post(http, {
+          product_id: this.state.product_id,
+          newReviews: reviews
         })
+        .then((response) => {
+          // update reviews, reviewsCount and averageRating based on new reviews in database
+          this.setState({
+            reviews: response.data
+          }, () => {
+            this.createReviewStars();
+            this.averageStars();
+            this.setState({ shownItems: this.state.reviews.length });
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       })
       .catch((error) => {
         console.log(error);
       });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    };
+
+    if (this.state.shownItems < this.state.reviews.length) {
+      // get difference between amount of items being shown and total review items
+      //  add difference to shownItems total to increase visible items to user
+
+      let shownDifference = this.state.reviews.length - this.state.shownItems; 
+      let lastItems = this.state.shownItems + shownDifference; 
+      this.setState({ shownItems: lastItems });
+    };
   }
 
   render() {
     if (this.state.mounted) {
+    // only show the first 'x' amount of reviews based on shown variable in state
+    console.log("These are all of the reviews: " + this.state.reviews)
+    const shownReviews = this.state.reviews.slice(0, this.state.shownItems);
+    console.log("These are all of the to be shown reviews: " + shownReviews);
       return (
         <div>
         <hr></hr>
-            <ReviewsBlock reviews={this.state.reviews} productDescription={this.state.product_description} 
+            <ReviewsBlock reviews={shownReviews} productDescription={this.state.product_description} 
               productPicture={this.state.product_picture} reviewCount={this.state.reviews_count} 
               rating={this.state.average_rating} randomInt={this.randomIntFromInterval} 
               createReviewStars={this.createReviewStars}>
@@ -244,9 +260,10 @@ export default class Reviews extends React.Component {
           <hr></hr>
         </div>
       )
-  } 
-    return (
-      <div>Loading</div>
-    )
+    } else {
+      return (
+        <div>Loading...</div>
+      )
+    }
   }
-};
+}
