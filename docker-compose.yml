@@ -1,7 +1,7 @@
 version: '3'
 services: 
   app:
-    container-name: forgEtsy_ReviewsFullStack
+    container_name: forgEtsy_ReviewsFullStack
     restart: always
     build: .
     ports:
@@ -9,7 +9,7 @@ services:
     links:
       - mongo
   mongo:
-    container-name: mongo
+    container_name: mongo
     image: mongo
     ports:
       - '27017:27017'

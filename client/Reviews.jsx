@@ -29,8 +29,8 @@ export default class Reviews extends React.Component {
   componentDidMount() {
     // let reviewsURL = 'http://localhost:3004/reviews';
     // let productsURL = 'http://localhost:3004/products';
-    let http = 'http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/reviews';
-    let http = 'http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/products';
+    let reviewsURL = 'http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/reviews';
+    let productsURL = 'http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/products';
 
     // Use axios all to populate initial reviews data and to get image of current product
     //  to be posted in each review
