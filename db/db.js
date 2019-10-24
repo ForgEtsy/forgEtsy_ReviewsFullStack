@@ -11,7 +11,7 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 
 // URL for Docker to host a new mongo database container
-mongoose.connect(`mongodb://mongo:27017/products`, {useNewUrlParser: true})
+mongoose.connect(`mongodb://localhost:${port}/products`, {useNewUrlParser: true})
 
 //connect that shit
 const db = mongoose.connection;
