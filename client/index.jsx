@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Reviews from './Reviews.jsx'
+import App from './App.jsx'
 import WebFont from 'webfontloader';
 
 WebFont.load({
@@ -9,4 +9,4 @@ WebFont.load({
     }
 });
 
-ReactDOM.render(<Reviews/>, document.getElementById('reviews'));
+ReactDOM.render(<App/>, document.getElementById('reviews'));
