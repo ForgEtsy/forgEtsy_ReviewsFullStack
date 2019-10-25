@@ -12,6 +12,7 @@
 }
 
 .reviewsblocktitle {
+    font-size: 14px;
     grid-column-start: 1;
     align-items: center;
     justify-items: start;
@@ -19,6 +20,7 @@
 }
 
 .reviewsCount {
+    font-size: 14px;
     grid-column-start: 3;
     opacity: 0.3;
 }
