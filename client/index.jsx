@@ -9,4 +9,4 @@ WebFont.load({
     }
 });
 
-ReactDOM.render(<Reviews/>, document.getElementById('root'));
+ReactDOM.render(<Reviews/>, document.getElementById('reviews'));

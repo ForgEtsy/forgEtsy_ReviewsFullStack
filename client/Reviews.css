@@ -1,5 +1,6 @@
 body {
   font-family: 'Gentium Basic', serif;
+  font-size: 14px;
 }
 
 .reviews {
@@ -10,7 +11,7 @@ body {
 .button {
   font-family: 'Gentium Basic', serif;
   text-decoration: underline;
-  font-size: 1rem;
+  font-size: 14px;
   box-shadow: none;
   outline: none;
   border: none;
