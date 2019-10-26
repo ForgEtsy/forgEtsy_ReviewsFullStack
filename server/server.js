@@ -3,6 +3,7 @@ const { Reviews, Products } = require("../db/db.js");
 var cors = require("cors");
 const path = require("path");
 const app = express();
+const compression = require("compression");
 
 app.use(express.json());
 app.use(cors());
@@ -12,6 +13,9 @@ let port = 3004;
 
 // Serve static client-side files
 app.use(express.static("dist"));
+
+// compressing files
+app.use(compression());
 
 app.get("/reviews", (req, res) => {
   // create variable to store product ID of requested reviews

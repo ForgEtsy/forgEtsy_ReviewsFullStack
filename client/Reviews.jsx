@@ -52,7 +52,6 @@ export default class Reviews extends React.Component {
     // let productId = this.props.match.params.productId ? this.props.match.params.productId : this.state.product_id;
     // let reviewsURL = "http://localhost:3004/reviews";
     // let productsURL = "http://localhost:3004/products";
-    console.log("This is the state of productID " + productId);
     let reviewsURL =
       "http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/reviews";
     let productsURL =

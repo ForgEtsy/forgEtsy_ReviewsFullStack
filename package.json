@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo no test script available",
     "start": "node server/server.js",
-    "dev": "webpack -d --watch"
+    "dev": "webpack -p --watch"
   },
   "repository": {
     "type": "git",
