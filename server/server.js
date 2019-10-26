@@ -14,7 +14,7 @@ let port = 3004;
 // Serve static client-side files
 app.use(express.static("dist"));
 
-// compressing files
+// compressing filesx
 app.use(compression());
 
 app.get("/reviews", (req, res) => {
