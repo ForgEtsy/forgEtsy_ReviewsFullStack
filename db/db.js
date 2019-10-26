@@ -11,12 +11,12 @@ const faker = require("faker");
 const mongoose = require("mongoose");
 
 // Local development URL
-mongoose.connect(`mongodb://localhost:${port}/products`, {
-  useNewUrlParser: true
-});
+// mongoose.connect(`mongodb://localhost:${port}/products`, {
+//   useNewUrlParser: true
+// });
 
 // Deployment URL
-// mongoose.connect(`mongodb://mongo:27017/products`, { useNewUrlParser: true });
+mongoose.connect(`mongodb://mongo:27017/products`, { useNewUrlParser: true });
 
 //connect that shit
 const db = mongoose.connection;

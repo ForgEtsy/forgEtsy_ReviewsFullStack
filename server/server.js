@@ -90,6 +90,4 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });
 
-// add path to serve static index html files
-
 module.exports.port = port;

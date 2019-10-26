@@ -50,12 +50,12 @@ export default class Reviews extends React.Component {
     const productId = windowProductID ? windowProductID : this.state.productId;
 
     // let productId = this.props.match.params.productId ? this.props.match.params.productId : this.state.product_id;
-    let reviewsURL = "http://localhost:3004/reviews";
-    let productsURL = "http://localhost:3004/products";
-    // let reviewsURL =
-    //   "http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/reviews";
-    // let productsURL =
-    //   "http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/products";
+    // let reviewsURL = "http://localhost:3004/reviews";
+    // let productsURL = "http://localhost:3004/products";
+    let reviewsURL =
+      "http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/reviews";
+    let productsURL =
+      "http://ec2-3-17-4-56.us-east-2.compute.amazonaws.com/products";
 
     // Use axios all to populate initial reviews data and to get image of current product
     //  to be posted in each review
